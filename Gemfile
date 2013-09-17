@@ -49,3 +49,4 @@ gem 'blacklight', '4.3.0'
 gem "devise"
 gem "devise-guests", "~> 0.3"
 gem "bootstrap-sass"
+gem 'jettywrapper'
