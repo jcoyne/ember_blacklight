@@ -15,6 +15,16 @@ function createOrGetRecordArray(context) {
   return array;
 }
 
+function createOrGetFacetArray(context) {
+  var array = context._facetArray;
+  if(array) { return array; }
+
+  context._facetArray = array = EmberBlacklight.RecordArray.create();
+
+  array.set("isLoaded", false);
+  return array;
+}
+
 function ajax(url){
   return Ember.Deferred.promise(function(promise){
     $.ajax(url, {
@@ -30,28 +40,29 @@ function ajax(url){
 EmberBlacklight.SearchResult.reopenClass({
   searchUrl: '/catalog?q=',
   findAll: function(query) {
-    var array = createOrGetRecordArray(this);
-    this.fetch(query, array);
-    return array;
+    var record_array = createOrGetRecordArray(this);
+    var facet_array = createOrGetFacetArray(this);
+    this.fetch(query, record_array, facet_array);
+    return {records: record_array, facets: facet_array};
   },
-  fetch: function(query, array){
+  fetch: function(query, record_array, facet_array){
     var model = this;
 
     ajax(this.searchUrl + query).then(function(data){
-      model.materializeData(data.response.docs, array.get("docs"), array);
+      model.materializeData(data.response, record_array.get("docs"), record_array, facet_array);
     }).then(null, function(err){
       console.error(err.message);
       console.error(err.stack);
       throw err;
     });
   }, 
-  materializeData: function(data, cache, records){
+  materializeData: function(data, cache, result_records, facet_records){
     var model = this;
-
-    var content = data.map(function(item){
+    var facets = data.facets.map(function(item){
+      return EmberBlacklight.Facet.create(item);
+    });
+    var content = data.docs.map(function(item){
       var record;
-      console.log(item);
-
       if(cache.has(item.id)){
         record = cache.get(item.id);
       } else {
@@ -62,8 +73,10 @@ EmberBlacklight.SearchResult.reopenClass({
       return record;
     });
 
-    records.set("content", content);
-    records.set("isLoaded", true);
+    result_records.set("content", content);
+    facet_records.set("content", facets);
+    result_records.set("isLoaded", true);
+    facet_records.set("isLoaded", true);
   }
 });
 
