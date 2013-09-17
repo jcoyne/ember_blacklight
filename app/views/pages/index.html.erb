@@ -26,7 +26,15 @@
       <h2>Facets</h2>
     </header>
     {{#each}}
-    <li>{{name}} {{items_size}}</li>
+      {{#if hasItems}}
+      <li>{{name}} {{items_size}}
+        <ul>
+          {{#each items}}
+          <li>{{value}} {{label}} {{hits}}</li>
+          {{/each}}
+        </ul>
+      </li>
+      {{/if}}
     {{/each}}
   </section>
 </script>

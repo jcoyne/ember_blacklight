@@ -4,11 +4,7 @@ EmberBlacklight.Router.map(function() {
 
 EmberBlacklight.SearchResultsRoute = Ember.Route.extend({
   renderTemplate: function() {
-    this.render('search_results', {
-        /* into: 'search_results', */
-        /* outlet: 'results', */
-        controller: 'search_results'
-    });
+    this.render('search_results');
     this.render('facets', {
         outlet: 'facets',
         into: 'search_results',
