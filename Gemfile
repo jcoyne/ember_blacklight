@@ -38,7 +38,7 @@ end
 # Use unicorn as the app server
 gem 'unicorn'
 
-gem 'blacklight', '4.3.0'
+gem 'blacklight', github: 'projectblacklight/blacklight'
 
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development

@@ -1,3 +1,16 @@
+GIT
+  remote: git://github.com/projectblacklight/blacklight.git
+  revision: 3e7560243b01052901a7eb81786ea4738893fbef
+  specs:
+    blacklight (4.3.0)
+      bootstrap-sass (>= 2.2.0, < 2.4)
+      kaminari (~> 0.13)
+      marc (>= 0.4.3, < 1.1)
+      nokogiri (~> 1.6)
+      rails (>= 3.2.6, < 5)
+      rsolr (~> 1.0.6)
+      sass-rails
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -28,14 +41,6 @@ GEM
     arel (4.0.0)
     atomic (1.1.14)
     bcrypt-ruby (3.1.2)
-    blacklight (4.3.0)
-      bootstrap-sass (>= 2.2.0, < 2.4)
-      kaminari (~> 0.13)
-      marc (>= 0.4.3, < 1.1)
-      nokogiri (~> 1.6)
-      rails (>= 3.2.6, < 5)
-      rsolr (~> 1.0.6)
-      sass-rails
     bootstrap-sass (2.3.2.1)
       sass (~> 3.2)
     builder (3.1.4)
@@ -81,7 +86,7 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
-    marc (0.6.0)
+    marc (0.7.1)
     mediashelf-loggable (0.4.9)
     mime-types (1.25)
     mini_portile (0.5.1)
@@ -155,7 +160,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  blacklight (= 4.3.0)
+  blacklight!
   bootstrap-sass
   coffee-rails (~> 4.0.0)
   devise
