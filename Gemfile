@@ -36,10 +36,16 @@ end
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
 # Use unicorn as the app server
-# gem 'unicorn'
+gem 'unicorn'
+
+gem 'blacklight', '4.3.0'
 
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+gem "devise"
+gem "devise-guests", "~> 0.3"
+gem "bootstrap-sass"
