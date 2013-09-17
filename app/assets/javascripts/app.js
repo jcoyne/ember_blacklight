@@ -1,0 +1,2 @@
+EmberBlacklight = Ember.Application.create();
+

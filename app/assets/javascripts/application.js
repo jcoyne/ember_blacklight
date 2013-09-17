@@ -18,8 +18,5 @@
 //= require handlebars-1.0.0
 //= require ember-1.0.0
 //= require ember-data
-EmberBlacklight = Ember.Application.create();
-
 //= require_tree .
-
 
