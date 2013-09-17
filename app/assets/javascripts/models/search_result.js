@@ -1,6 +1,5 @@
-EmberBlacklight.SearchQuery = Ember.Object.extend({
+EmberBlacklight.SearchResult = Ember.Object.extend({
 });
-
 EmberBlacklight.RecordArray = Ember.ArrayProxy.extend({
 });
 
@@ -19,7 +18,6 @@ function createOrGetRecordArray(context) {
 function ajax(url){
   return Ember.Deferred.promise(function(promise){
     $.ajax(url, {
-      data: { q: "Kubo"},
       dataType: "json"
     }).then(function(data){
       Ember.run(promise, promise.resolve, data);
@@ -29,19 +27,17 @@ function ajax(url){
   });
 }
 
-EmberBlacklight.SearchQuery.reopenClass({
-  searchUrl: '/catalog',
-  findAll: function(data) {
+EmberBlacklight.SearchResult.reopenClass({
+  searchUrl: '/catalog?q=',
+  findAll: function(query) {
     var array = createOrGetRecordArray(this);
-    this.fetch(array);
+    this.fetch(query, array);
     return array;
   },
-  fetch: function(array){
+  fetch: function(query, array){
     var model = this;
 
-    ajax(this.searchUrl).then(function(data){
-      console.log("got");
-      console.log(data);
+    ajax(this.searchUrl + query).then(function(data){
       model.materializeData(data.response.docs, array.get("docs"), array);
     }).then(null, function(err){
       console.error(err.message);
@@ -69,16 +65,5 @@ EmberBlacklight.SearchQuery.reopenClass({
     records.set("content", content);
     records.set("isLoaded", true);
   }
-
-
-  //   var _this = this;
-  //   return $.ajax({
-  //     url: "/catalog",
-  //     dataType: 'json',
-  //     //data: data
-  //   }).then(function(result){
-  //     new EmberBlacklight.SearchResult
-  //     _this.set('searchData', result);
-  //   });
-  // }
 });
+
