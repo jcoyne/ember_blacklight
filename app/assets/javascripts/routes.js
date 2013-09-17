@@ -4,11 +4,11 @@ EmberBlacklight.Router.map(function() {
 
 EmberBlacklight.SearchesRoute = Ember.Route.extend({
   model: function() {
-    return this.store.find('search_query');
+    return EmberBlacklight.SearchQuery.findAll();
   },
   actions: {
-    error: function() {
-      console.log("Damn! An error occurred.");
-    }
+    // error: function() {
+    //   console.log("Damn! An error occurred.");
+    // }
   }
 });
